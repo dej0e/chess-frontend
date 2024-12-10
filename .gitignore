@@ -23,5 +23,5 @@ yarn-error.log*
 
 # Optional: Ignore all files in public except for index.html
 /public/*
-!/public/assets/chess_pieces
+!/public/assets
 !/public/index.html

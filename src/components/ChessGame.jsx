@@ -96,18 +96,18 @@ const ChessGame = () => {
     if (!piece) return null;
   
     const pieceMap = {
-      K: '/assets/chess_pieces/white_king.svg',
-      Q: '/assets/chess_pieces/white_queen.svg',
-      R: '/assets/chess_pieces/white_rook.svg',
-      B: '/assets/chess_pieces/white_bishop.svg',
-      N: '/assets/chess_pieces/white_knight.svg',
-      P: '/assets/chess_pieces/white_pawn.svg',
-      k: '/assets/chess_pieces/black_king.svg',
-      q: '/assets/chess_pieces/black_queen.svg',
-      r: '/assets/chess_pieces/black_rook.svg',
-      b: '/assets/chess_pieces/black_bishop.svg',
-      n: '/assets/chess_pieces/black_knight.svg',
-      p: '/assets/chess_pieces/black_pawn.svg',
+      K: '/assets/white_king.svg',
+      Q: '/assets/white_queen.svg',
+      R: '/assets/white_rook.svg',
+      B: '/assets/white_bishop.svg',
+      N: '/assets/white_knight.svg',
+      P: '/assets/white_pawn.svg',
+      k: '/assets/black_king.svg',
+      q: '/assets/black_queen.svg',
+      r: '/assets/black_rook.svg',
+      b: '/assets/black_bishop.svg',
+      n: '/assets/black_knight.svg',
+      p: '/assets/black_pawn.svg',
     };
   
     return pieceMap[piece] || null;
