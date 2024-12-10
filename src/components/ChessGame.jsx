@@ -93,23 +93,25 @@ const ChessGame = () => {
   };
 
   const getPieceSymbol = (piece) => {
-    const symbols = {
-      k: '♔',
-      q: '♕',
-      r: '♖',
-      b: '♗',
-      n: '♘',
-      p: '♙',
-      K: '♚',
-      Q: '♛',
-      R: '♜',
-      B: '♝',
-      N: '♞',
-      P: '♟',
+    if (!piece) return null;
+  
+    const pieceMap = {
+      K: '/assets/chess_pieces/white_king.svg',
+      Q: '/assets/chess_pieces/white_queen.svg',
+      R: '/assets/chess_pieces/white_rook.svg',
+      B: '/assets/chess_pieces/white_bishop.svg',
+      N: '/assets/chess_pieces/white_knight.svg',
+      P: '/assets/chess_pieces/white_pawn.svg',
+      k: '/assets/chess_pieces/black_king.svg',
+      q: '/assets/chess_pieces/black_queen.svg',
+      r: '/assets/chess_pieces/black_rook.svg',
+      b: '/assets/chess_pieces/black_bishop.svg',
+      n: '/assets/chess_pieces/black_knight.svg',
+      p: '/assets/chess_pieces/black_pawn.svg',
     };
-    return symbols[piece];
+  
+    return pieceMap[piece] || null;
   };
-
   const getSquareCoord = (row, col) => {
     const files = 'abcdefgh';
     const ranks = '87654321'; // Standard ranks
@@ -195,8 +197,13 @@ const ChessGame = () => {
     isPlayersTurn() ? 'cursor-pointer hover:scale-110 hover:brightness-125' : 'cursor-not-allowed opacity-90'
   }`}
 >
-  {getPieceSymbol(piece)}
-</div>
+{piece && (
+    <img
+      src={getPieceSymbol(piece)}
+      alt={piece}
+      className="w-12 h-12"
+    />
+  )}</div>
 
                 );
               })
