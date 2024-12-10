@@ -1,0 +1,32 @@
+.chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    width: 480px;
+    height: 480px;
+    border: 2px solid #333;
+  }
+  
+  .square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+  }
+  
+  .light-square {
+    background-color: #f0d9b5;
+  }
+  
+  .dark-square {
+    background-color: #b58863;
+  }
+  
+  .selected {
+    outline: 2px solid yellow;
+  }
+  
+  .valid-move {
+    outline: 2px solid green;
+  }
+  
