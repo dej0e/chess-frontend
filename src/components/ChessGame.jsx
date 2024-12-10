@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FaCopy } from 'react-icons/fa';
 
 const ChessGame = () => {
   const [gameId, setGameId] = useState(null);
@@ -30,6 +31,13 @@ const ChessGame = () => {
       setError('Failed to connect to server');
     }
   };
+
+  const copyGameId = () => {
+    if (gameId) {
+      navigator.clipboard.writeText(gameId); // Copy game ID to clipboard
+    }
+  };
+
 
   // Join an existing game
   const joinGame = () => {
@@ -94,7 +102,7 @@ const ChessGame = () => {
 
   const getPieceSymbol = (piece) => {
     if (!piece) return null;
-  
+
     const pieceMap = {
       K: '/assets/white_king.svg',
       Q: '/assets/white_queen.svg',
@@ -109,7 +117,7 @@ const ChessGame = () => {
       n: '/assets/black_knight.svg',
       p: '/assets/black_pawn.svg',
     };
-  
+
     return pieceMap[piece] || null;
   };
   const getSquareCoord = (row, col) => {
@@ -160,15 +168,22 @@ const ChessGame = () => {
       {gameId && (
         <div>
           <h1 className="text-2xl font-bold mb-2">Chess Game</h1>
-          <p className="text-sm text-gray-600">Game ID: {gameId}</p>
+          <div className="flex items-center space-x-2">
+            <p className="text-sm text-gray-600">Game ID: {gameId}</p>
+            <button
+              onClick={copyGameId}
+              className="p-1 bg-gray-200 rounded hover:bg-gray-300"
+            >
+              <FaCopy className="text-gray-600" />
+            </button>
+          </div>
           <p className="text-sm text-gray-600">
-            You are {isWhitePlayer ? 'White (Solids)' : 'Black (Outlines)'}
+            You are {isWhitePlayer ? 'White' : 'Black'}
           </p>
           <p className="text-sm text-gray-600">Time Elapsed: {gameState.time_elapsed}</p>
           <p
-            className={`text-lg font-semibold ${
-              isPlayersTurn() ? 'text-green-600' : 'text-red-600'
-            }`}
+            className={`text-lg font-semibold ${isPlayersTurn() ? 'text-green-600' : 'text-red-600'
+              }`}
           >
             {isPlayersTurn() ? "It's your turn" : "Waiting for opponent's turn"}
           </p>
@@ -182,28 +197,24 @@ const ChessGame = () => {
                   selectedSquare &&
                   gameState.legal_moves.includes(`${selectedSquare}${squareCoord}`);
                 return (
-                    <div
-  key={`${rowIndex}-${colIndex}`}
-  onClick={() => {
-    if (isPlayersTurn()) handleSquareClick(rowIndex, colIndex); // Allow clicks only if it's the player's turn
-  }}
-  className={`w-16 h-16 flex items-center justify-center text-3xl font-semibold transition-transform transform ${
-    isLight ? 'bg-green-100 text-black' : 'bg-green-800 text-white'
-  } ${
-    isSelected ? 'ring-4 ring-yellow-500 scale-105 shadow-lg' : ''
-  } ${
-    isValidMove ? 'ring-4 ring-green-400 scale-105 shadow-lg' : ''
-  } ${
-    isPlayersTurn() ? 'cursor-pointer hover:scale-110 hover:brightness-125' : 'cursor-not-allowed opacity-90'
-  }`}
->
-{piece && (
-    <img
-      src={getPieceSymbol(piece)}
-      alt={piece}
-      className="w-12 h-12"
-    />
-  )}</div>
+                  <div
+                    key={`${rowIndex}-${colIndex}`}
+                    onClick={() => {
+                      if (isPlayersTurn()) handleSquareClick(rowIndex, colIndex); // Allow clicks only if it's the player's turn
+                    }}
+                    className={`w-16 h-16 flex items-center justify-center text-3xl font-semibold transition-transform transform ${isLight ? 'bg-green-100 text-black' : 'bg-green-800 text-white'
+                      } ${isSelected ? 'ring-4 ring-yellow-500 scale-105 shadow-lg' : ''
+                      } ${isValidMove ? 'ring-4 ring-green-400 scale-105 shadow-lg' : ''
+                      } ${isPlayersTurn() ? 'cursor-pointer hover:scale-110 hover:brightness-125' : 'cursor-not-allowed opacity-90'
+                      }`}
+                  >
+                    {piece && (
+                      <img
+                        src={getPieceSymbol(piece)}
+                        alt={piece}
+                        className="w-12 h-12"
+                      />
+                    )}</div>
 
                 );
               })
